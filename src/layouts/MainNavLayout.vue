@@ -14,6 +14,9 @@ import StorefrontOutline from "vue-material-design-icons/StorefrontOutline.vue";
 import TelevisionPlay from "vue-material-design-icons/TelevisionPlay.vue";
 import { useRoute } from "vue-router";
 import { useGeneralStore } from "../stores/general";
+import CropperModal from "../components/CropperModal.vue";
+import ImageDisplay from "../components/ImageDisplay.vue";
+import CreatePostOverlay from "../components/CreatePostOverlay.vue";
 
 const route = useRoute();
 const useGeneral = useGeneralStore();
@@ -28,7 +31,9 @@ const showMenu = ref(false);
     class="fixed z-50 w-full flex items-center justify-between h-[56px] bg-white shadow-xl border-b"
   >
     <div id="NavLeft" class="flex items-center justify-start w-[260px]">
-      <RouterLink to="/" class="pl-3 min-w-[55px]"> FB </RouterLink>
+      <RouterLink to="/" class="pl-3 min-w-[55px]">
+        <img src="/images/FacebookLogoCircle.png" alt="logo" class="w-[40px]" />
+      </RouterLink>
       <div
         class="flex items-center justify-center bg-[#EFF2F5] p-1 rounded-full h-[40px] ml-2"
       >
@@ -152,4 +157,10 @@ const showMenu = ref(false);
     </div>
   </div>
   <slot></slot>
+
+  <CreatePostOverlay v-if="isPostOverlay" @show-modal="isPostOverlay = false" />
+
+  <CropperModal v-if="isCropperModal" @show-modal="isCropperModal = false" />
+
+  <ImageDisplay v-if="isImageDisplay" />
 </template>
